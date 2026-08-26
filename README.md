@@ -22,9 +22,7 @@ https://visitor-management-system-production-b3cc.up.railway.app/
 8. Run `php artisan serve`.
 9. Open `http://127.0.0.1:8000/login`.
 
-## Demo login
-Username: `admin`
-Password: `admin123`
+
 
 ## Main features
 - Login / Logout
