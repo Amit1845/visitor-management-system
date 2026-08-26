@@ -1,10 +1,9 @@
-<?php
+\<?php
 
 namespace App\Http\Controllers;
 
 use App\Models\Visitor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 
 class VisitorController extends Controller
 {
@@ -41,7 +40,9 @@ class VisitorController extends Controller
         if ($duplicate) {
             return back()
                 ->withInput()
-                ->withErrors(['Name' => 'This visitor is already active today.']);
+                ->withErrors([
+                    'Name' => 'This visitor is already active today.'
+                ]);
         }
 
         $visitor = Visitor::create([
@@ -52,7 +53,8 @@ class VisitorController extends Controller
             'Status' => 'Active',
         ]);
 
-        $visitor->receipt_id = random_int(100000, 999999);
+        // Receipt ID will be the same as Serial number
+        $visitor->receipt_id = $visitor->Serial;
         $visitor->save();
 
         return redirect()
@@ -69,6 +71,7 @@ class VisitorController extends Controller
             'receipt_id' => ['required', 'integer']
         ]);
 
+        // Find active visitor using Receipt ID
         $visitor = Visitor::where('receipt_id', $data['receipt_id'])
             ->where('Status', 'Active')
             ->first();
@@ -84,7 +87,10 @@ class VisitorController extends Controller
             'Status' => 'Checked Out'
         ]);
 
-        return back()->with('success', 'Visitor checked out successfully!');
+        return back()->with(
+            'success',
+            'Visitor checked out successfully!'
+        );
     }
 
     public function checkedOut(Request $request)
