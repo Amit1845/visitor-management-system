@@ -2,6 +2,10 @@
 
 Recreated from the provided BCA Visitor Management System documentation. The documented project uses PHP Laravel, MySQL and XAMPP and includes login, dashboard, visitor registration, check-out, visitor lists and filtering.
 
+Link of the website:
+
+https://visitor-management-system-production-b3cc.up.railway.app/
+
 ## Requirements
 - PHP 8.2+
 - Composer
