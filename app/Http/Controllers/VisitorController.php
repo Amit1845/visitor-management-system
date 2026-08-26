@@ -61,7 +61,7 @@ class VisitorController extends Controller
             ->route('dashboard')
             ->with(
                 'success',
-                'Visitor added successfully! Receipt ID: ' . $visitor->receipt_id
+                'Visitor added successfully! Receipt ID: ' . $visitor->Serial
             );
     }
 
@@ -71,8 +71,8 @@ class VisitorController extends Controller
             'receipt_id' => ['required', 'integer']
         ]);
 
-        // Find active visitor using Receipt ID
-        $visitor = Visitor::where('receipt_id', $data['receipt_id'])
+        // Receipt ID is the same as Serial number
+        $visitor = Visitor::where('Serial', $data['receipt_id'])
             ->where('Status', 'Active')
             ->first();
 
@@ -133,8 +133,8 @@ class VisitorController extends Controller
 
             $query->where(function ($q) use ($s) {
                 $q->where('Name', 'like', "%$s%")
-                  ->orWhere('Contact', 'like', "%$s%")
-                  ->orWhere('meetingTo', 'like', "%$s%");
+                    ->orWhere('Contact', 'like', "%$s%")
+                    ->orWhere('meetingTo', 'like', "%$s%");
             });
         }
 
